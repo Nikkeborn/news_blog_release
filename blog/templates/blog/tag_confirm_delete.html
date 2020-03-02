@@ -1,0 +1,21 @@
+{% extends 'blog/base_blog.html' %}
+
+
+{% block title %}
+    Confirm tag delete
+{% endblock %}
+
+
+{% block content %}
+    <div>
+        <h5>Confirm tag delete: <strong>{{ tag.title }}</strong></h5>
+        <form action="{% url 'blog:tag_delete' pk=tag.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+        <form action="{% url 'blog:tags' %}" method="get">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-secondary btn-sm">Cancel</button>
+        </form>
+    </div>
+{% endblock %}

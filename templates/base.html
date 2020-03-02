@@ -1,0 +1,51 @@
+{% load static %}
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Orbitron&display=swap">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <title>
+            {% block title %}
+            {% endblock %}
+        </title>
+    </head>
+    <body>
+        <div>
+            <h1><a href="/articles/">Startup News Blog</a></h1>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'blog:articles' %}">Articles </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'blog:startups' %}">Startups </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'blog:tags' %}">Tags </a>
+                    </li>
+                    <li class="nav-item active">
+                        {% if not request.user.is_authenticated %}
+                            <a class="nav-link" href="{% url 'login' %}"><strong>Login</strong></a>
+                        {% else %}
+                        <a class="nav-link" href="/accounts/logout/"><span style="border:2px solid red; padding:3px;"><span style="color:black;">Logout </span></span></a>
+                        {% endif %}
+                    </li><li class="nav-item active">
+                        <a class="nav-link" href="{% url 'registration' %}">Register </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" action="{% url 'blog:search' %}" method="get">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>

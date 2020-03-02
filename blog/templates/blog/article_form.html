@@ -1,0 +1,22 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block title %}
+    New article form
+{% endblock %}
+
+
+{% block content %}
+    <form class="form-group" action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'blog/form-template.html' %}
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
+        </div>
+    </form>
+    <form action="{% url 'blog:articles' %}" method="get">
+        {% csrf_token %}
+        <div class="form-group">
+            <button type="submit" class="btn btn-secondary btn-sm">Cancel</button>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'blog/base_blog.html' %}
+
+
+{% block title %}
+    Home page
+{% endblock %}
+
+
+{% block content %}
+    {% for article in articles %}
+        <h3><a href="{% url 'blog:article_details' pk=article.pk %}">{{ article.title }}</a></h3>
+        <p>published: {{ article.published_date }}</p>
+        <form action="{% url 'blog:article_delete' pk=article.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+        <form action="{% url 'blog:article_edit' pk=article.pk %}" method="get">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+        </form>
+        <p>{{ article.text|linebreaksbr }}</p>
+    {% endfor %}
+{% endblock %}
+

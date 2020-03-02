@@ -1,0 +1,20 @@
+{% extends 'blog/base_blog.html' %}
+
+{% block title %}
+    Tags list
+{% endblock %}
+
+
+{% block content %}
+    <form action="{% url 'blog:new_tag' %}" method="get">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary btn-sm">Add new tag</button>
+    </form>
+    {% for tag in tags %}
+        <h3>{{ tag.title }}</h3>
+        <form action="{% url 'blog:tag_delete' pk=tag.pk %}" method="get">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+        </form>
+    {% endfor %}
+{% endblock %}
