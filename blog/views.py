@@ -31,7 +31,7 @@ class ArticleDetails(DetailMixin, View):
     template_name = 'blog/article_details.html'
 
 
-class AuthorDetails(DetailMixin, View):
+class AuthorDetails(AuthorDetailMixin, View):
     model = User
     template_name = 'blog/author_details.html'
 

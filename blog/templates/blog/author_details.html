@@ -10,7 +10,7 @@
     <p><strong>Users last visit was:</strong>  {{ user.last_login }}</p>
     <p><strong>Users date of registration:</strong>  {{ user.date_joined }}</p>
     <ul type=' '>
-        {% for it in user.article_author.get_queryset %}
+        {% for it in art_li %}
             <li><strong>{{ it.title }}</strong> - {{ it.created_date }}</li>
         {% endfor %}
     </ul>
