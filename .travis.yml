@@ -1,0 +1,21 @@
+# language python
+language: python
+
+# Python version
+python:
+  - "3.6"
+  - "3.8"
+
+env:
+  - DJANGO_VERSION=3.0.3
+
+# 
+virtualenv:
+  system_site_packages: true
+
+# command to install dependencies
+install:
+  - pip install -r requirements.txt
+
+# command to run tests
+script:python ./manage.py test
